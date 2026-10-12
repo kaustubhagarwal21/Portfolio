@@ -57,7 +57,7 @@
           <p class="stack">Next.js &middot; TypeScript &middot; Zustand &middot; WebSockets &middot; TradingView Lightweight Charts &middot; Jest &middot; Playwright</p>
           <ul>
             <li>Streams live Binance trades and order books over WebSockets, with reconnect backoff and a fallback to a simulated NSE-style feed running in a Web Worker.</li>
-            <li>Batches ticks per animation frame into one store commit: 500 ticks/s in, about 40 store updates/s, 200+ FPS (measured).</li>
+            <li>Two-stage batching (25 ms worker batches, then at most one store commit per animation frame): at 500 simulated ticks/s, 40 store updates/s and 200+ FPS on a 240 Hz display (measured).</li>
             <li>Paper-trading ticket with MARKET, LIMIT and stop-loss orders typed as a discriminated union; 231 Jest/RTL tests, 12 Playwright tests and CI.</li>
           </ul>
           <p class="links"><a href="https://tickdeck-kaustubh.netlify.app">Live demo</a><a href="https://github.com/kaustubhagarwal21/tickdeck">Code</a></p>
