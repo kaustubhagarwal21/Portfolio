@@ -1,299 +1,199 @@
+/* Kaustubh Agarwal: portfolio styles.
+   One self-contained stylesheet: system fonts, CSS variables for the
+   colours, a dark theme by default and a light theme when the OS asks. */
 
-/********************* NOTES ************************
-The basic resets below allow you to create your own styling
-without having to fight some of the most annoying built in 
-agent user styles.
-****************************************************/
-
-/************* Basic Resets ***************/
-
-h1, h2, h3, h4, p, ul, ol, blockquote {
-	margin: 0;
-	padding: 0;
+:root {
+  --bg: #0f1115;
+  --surface: #171a21;
+  --surface-2: #1f232c;
+  --text: #e8eaf0;
+  --muted: #a3a9b7;
+  --line: #2a2f3a;
+  --accent: #f5b301;
+  --accent-ink: #111111;
+  --link: #8ab4ff;
+  --radius: 14px;
+  --wrap: 1080px;
 }
 
-nav ul, nav ol {
-	list-style-type: none;
-}
-
-/******** Additional resets *********/
-a { text-decoration:none; }
-
-img {
-	display: block;
-	max-width:100%; 
-	height: auto;
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --surface-2: #f0f1f4;
+    --text: #15171c;
+    --muted: #5b6170;
+    --line: #e1e3e8;
+    --accent: #c98f00;
+    --accent-ink: #ffffff;
+    --link: #1f5fd1;
+  }
 }
 
 * { box-sizing: border-box; }
 
-/************ End CSS Reset  *************/
-
-
-/********************* NOTES ************************
-Below are the only colors I have used. Choose four new
-colors and do a find and replace to replace the hex codes.
-****************************************************/
-
-
-/*********** Colors ***********
-
-primary = #b5b5b5;
-secondary = #efefef;
-accent = #4574b5
-text default = #333333;
-
-
-********************************/
-
-
-/************* Basic Page Rules ************/
-
-
-/********************* NOTES ************************
-I set the background of the page to dark and the main
-font to Georgia for most of the type. The header font
-is set to Arial. You could get two fonts that work well
-together and replace these choices. You may have to adjust
-sizing and spacing as well.
-****************************************************/
-
+html { scroll-behavior: smooth; }
 
 body {
-	font-family:Georgia;
-	color:#333;
-	background:#333;
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
 }
 
-/************* typography ************/
+img { display: block; max-width: 100%; height: auto; }
 
-h1, h2, h3, h4, nav { 
-	font-family:Arial;
-	font-weight:bold; 
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, .brand:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
-h1 {
-	font-size:250%;
-	margin-bottom:1em;
+h1, h2, h3 { line-height: 1.2; margin: 0 0 0.6em; }
+p, ul, ol, dl { margin: 0 0 1em; }
+
+.wrap { width: min(var(--wrap), 100% - 32px); margin-inline: auto; }
+
+/* Skip link: hidden until focused with the keyboard */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  padding: 8px 14px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-radius: 8px;
+  z-index: 10;
+}
+.skip-link:focus { top: 12px; }
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.header-row { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+.brand:hover { text-decoration: none; }
+.nav { display: flex; gap: 22px; list-style: none; padding: 0; margin: 0; }
+.nav a { color: var(--muted); font-weight: 600; font-size: 15px; }
+.nav a:hover { color: var(--text); text-decoration: none; }
+
+/* Hero */
+.hero { padding: 72px 0 40px; }
+.eyebrow { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; }
+.hero h1 { font-size: clamp(40px, 7vw, 64px); letter-spacing: -0.02em; margin-bottom: 0.3em; }
+.lede { font-size: 20px; color: var(--muted); max-width: 46em; }
+.pill-links { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin-top: 24px; }
+.pill-links a {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 15px;
+}
+.pill-links a:hover { border-color: var(--accent); text-decoration: none; }
+
+/* Sections */
+.section { padding: 48px 0; border-top: 1px solid var(--line); }
+.section h2 { font-size: 28px; }
+.sub-heading { margin-top: 48px; }
+.stack { color: var(--muted); font-size: 14px; margin-bottom: 0.8em; }
+.links { display: flex; flex-wrap: wrap; gap: 18px; font-weight: 700; margin: 0; }
+.links.big { font-size: 18px; }
+
+/* Featured project cards: image beside text on wide screens */
+.feature {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.feature .shot img { border-radius: 10px; border: 1px solid var(--line); }
+.feature h3 { font-size: 22px; }
+.feature ul { padding-left: 1.2em; }
+.feature li { margin-bottom: 0.4em; }
+
+@media (min-width: 860px) {
+  .feature { grid-template-columns: 1.15fr 1fr; align-items: center; padding: 24px; }
 }
 
-h2 {
-	font-size:170%;
-	margin-bottom:1em;
+/* Smaller project cards */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.card h3 { font-size: 19px; margin-bottom: 0.3em; }
+.card p:not(.stack):not(.links) { color: var(--text); font-size: 16px; }
+.card .links { margin-top: auto; }
+
+/* Experience timeline */
+.timeline { list-style: none; padding: 0; }
+.timeline li {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.timeline li:last-child { border-bottom: 0; }
+.timeline h3 { font-size: 19px; margin-bottom: 0.2em; }
+.when { color: var(--accent); font-weight: 700; font-size: 15px; }
+.where { color: var(--muted); font-size: 15px; margin-bottom: 0.4em; }
+
+@media (min-width: 720px) {
+  .timeline li { grid-template-columns: 170px 1fr; }
 }
 
-h3 { 
-	font-size:135%;
-	margin-bottom:1em;
+/* Achievements and skills */
+.two-col { display: grid; grid-template-columns: 1fr; gap: 32px; }
+@media (min-width: 860px) { .two-col { grid-template-columns: 1fr 1fr; } }
+.plain { list-style: none; padding: 0; }
+.plain li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+.skills { display: grid; grid-template-columns: 110px 1fr; gap: 10px 16px; }
+.skills dt { color: var(--muted); font-weight: 700; }
+.skills dd { margin: 0; }
+
+/* Contact and footer */
+.contact p { max-width: 40em; }
+.site-footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 560px) {
+  .nav { gap: 14px; }
+  .nav a { font-size: 14px; }
+  .lede { font-size: 18px; }
 }
 
-h4 { 
-	font-size:115%;
-	margin-bottom:.5em;
-}
-	
-
-p {
-	line-height:1.5em;
-	margin-bottom:1em;
-}
-
-a { color: #4574b5; }
-
-.social { font-size:175%; }
-
-.centered { text-align:center; }
-
-/****************** Grid ******************/
-
-.primary { background:#b5b5b5; }
-.secondary { background:#efefef; }
-
-
-/****************** Header and Main Navigation ****************/
-
-header {
-	padding: 20px;
-}
-
-header .wrapper {
-	display: flex;
-	flex-direction: column-reverse;
-	flex-wrap: wrap;
-}
-
-.logo-container {
-	display: flex;
-	flex-direction: row-reverse;
-	justify-content: flex-end;
-}
-
-#logo {
-	margin-right:20px;
-}
-
-
-#mainnav {
-	margin-bottom: 20px;
-}
-
-#mainnav ul {
-	display: flex;
-	justify-content: center;
-}
-
-#mainnav ul li a {
-	display:block;
-	color: #4574b5;
-	border-left: 2px solid #4574b5;
-	padding:0 20px;
-	font-size:20px;
-}
-
-/********************* NOTES ************************
-Removes the border on the first link...
-****************************************************/
-
-#mainnav ul li:first-of-type a {
-	border:none;
-}
-
-
-/***************** Section Specific Rules *****************/
-
-#work {
-	background:#fff;
-	padding: 20px;
-}
-
-#work img, .additional-projects img {
-	width: 100%;
-	margin-bottom: 10px;
-}
-
-.featured, .projects, #page-template #work section {
-	margin-bottom: 40px;
-}
-
-#about-contact, .additional-projects {
-	padding: 20px;
-}
-
-#about-contact img {
-	margin-bottom: 10px;
-}
-
-/********************* NOTES ************************
-I added all this margin to the bottom of the footer so
-that when you click the link for "about" or "contact" in
-the main nav, there is room for them to go all the way to
-the top of the page.
-****************************************************/
-
-footer {
-	padding: 20px;
-	margin-bottom:600px;
-}
-
-@media only screen and (min-width: 650px) {
-	#work {
-		padding: 20px 10px;
-	}
-	
-	#work article, h2 {
-		padding: 0 10px;
-	}
-	
-	.projects, #page-template #work section  {
-		display: flex;
-		flex-wrap: wrap;
-	}
-	
-	.projects article, #page-template #work section article {
-		width: 50%;
-	}
-	
-	.additional-projects .wrapper{
-		display: flex;
-		flex-wrap: wrap;
-	}
-	
-	.additional-projects h2 {
-		flex-basis: 100%;
-	}
-	
-	.additional-projects article {
-		width: 50%;
-		padding: 0 10px;
-	}
-	
-	#about-contact {
-		padding: 0;
-	}
-	
-	#about-contact .wrapper {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: flex-start;
-		padding: 20px 10px;
-	}
-	
-	#about-contact .profile-photo {
-		flex: 1;
-		padding: 0 10px;
-		width: 100%;
-	}
-	
-	#about-contact article {
-		padding: 0 10px;
-	}
-	
-	#about-contact article:first-of-type {
-		flex: 2;
-	}
-	
-	#about-contact article:last-of-type {
-		flex-basis: 100%;
-	}
-	
-}
-
-@media only screen and (min-width: 768px) {
-	
-	.featured {
-		display: flex;
-	}
-	
-	.featured article {
-		flex: 1;
-	}
-	
-	.additional-projects article {
-		width: 25%;
-	}
-	
-	#about-contact .wrapper {
-		flex-wrap: nowrap;
-	}
-	
-	#about-contact article:last-of-type {
-		flex: 2;
-		flex-basis: 0;
-	}
-}
-
-@media only screen and (min-width: 1040px) {
-	.wrapper {
-		width: 1020px;
-		margin: auto;
-	}
-	
-	header .wrapper {
-		padding: 0 10px;
-	}
-	
-	/*Change the width here to 33% if you want three articles in a row*/
-	.projects article {
-		width: 25%;
-	}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

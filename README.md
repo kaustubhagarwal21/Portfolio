@@ -1,8 +1,10 @@
-# portfolio-template
-A basic html/css template for web concentration portfolio 1 students
+# Kaustubh Agarwal: portfolio
 
-Download this template and use it to build a simple portfolio website. There are lots of comments in the code to explain what is doing what, plus I have made a google presentation that will walk you through some of the things you need to do. Those slides can be found here:
+Personal portfolio site: https://portfolio-theta-rose-91.vercel.app
 
-https://docs.google.com/presentation/d/1ybdws_K_1xUW_wzs9dlSobAagYgSCbpZaJKJ1cLyp6k/edit?usp=sharing
+A single static page (`index.html` + `styles.css`, no build step) listing my projects, experience,
+achievements and skills. It uses system fonts, a dark theme with an automatic light theme, and
+keyboard-accessible navigation.
 
-Using this template requires a basic understanding of HTML and CSS
+Project screenshots in `assets/` are taken from my own deployed apps:
+[TickDeck](https://tickdeck-kaustubh.netlify.app) and [Tofino](https://tofino-cafeteria.netlify.app).
